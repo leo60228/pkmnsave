@@ -1,0 +1,17 @@
+{
+  "name": "pkmnsave",
+  "version": "1.0.0",
+  "description": "Edits Pokemon Red and Blue save files",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "snuggles08",
+  "license": "MIT",
+  "dependencies": {
+    "yargs": "^3.29.0"
+  }
+}
