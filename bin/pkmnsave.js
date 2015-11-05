@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
+var path = require('path');
+var cli = path.basename(__filename);
+
 var argv = require('yargs')
-	.usage('Usage: $0 <command> [options]')
+	.usage('Usage: ' + cli + ' <command> [options]')
 	.command('checksum', 'Fix the checksum after modifications')
 	.demand(1)
-	.example('$0 checksum -f edited.sav', 'Fix the checksum of edited.sav')
+	.example(cli + ' checksum -f edited.sav', 'Fix the checksum of edited.sav')
 	.demand('f')
 	.alias('f', 'file')
 	.nargs('f', 1)
@@ -19,7 +22,13 @@ var fs = require('fs');
 switch (argv._[0]) {
 	case 'checksum':
 		var calcChecksum = require('./calculateChecksum.js');
-		console.log(calcChecksum(new Uint8Array(fs.readFileSync(argv.file))));
+		var checksum = calcChecksum(new Uint8Array(fs.readFileSync(argv.file)));
+
+		var fd = fs.openSync(argv.file, 'r+');
+		var data = new Buffer([checksum]);
+		fs.writeSync(fd, data, 0, 1, 0x3523);
+		fs.closeSync(fd);
+
 		break;
 	default:
 		console.log('Invalid checksum!');

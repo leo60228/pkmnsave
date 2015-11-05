@@ -11,6 +11,9 @@
   },
   "author": "snuggles08",
   "license": "MIT",
+  "bin": {
+    "pkmnsave": "bin/pkmnsave.js"
+  },
   "dependencies": {
     "yargs": "^3.29.0"
   }
