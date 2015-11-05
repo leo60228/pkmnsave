@@ -21,8 +21,8 @@ var fs = require('fs');
 
 switch (argv._[0]) {
 	case 'checksum':
-		var calcChecksum = require('./calculateChecksum.js');
-		var checksum = calcChecksum(new Uint8Array(fs.readFileSync(argv.file)));
+		var calcChecksum = require(__dirname + '/../calculateChecksum.js');
+		var checksum = calcChecksum(new Uint8Array(fs.readFileSync(argv.file))).buffer[0x0000];
 
 		var fd = fs.openSync(argv.file, 'r+');
 		var data = new Buffer([checksum]);

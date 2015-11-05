@@ -24,5 +24,10 @@ module.exports = function(buffer) {
 
 	checksum = checksum % 256;
 
-	return not(checksum);
+	checksum = not(checksum);
+
+	return {
+		address: 0x3523,
+		buffer: new Uint8Array([checksum])
+	};
 }
